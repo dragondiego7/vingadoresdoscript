@@ -1,0 +1,92 @@
+/* Estrutura da página */
+* {
+	position: relative;
+}
+
+.corpo{
+	height: 100%;
+	width: 100%;
+	margin: 0%;
+	padding: 0%;
+}
+
+.estrutura{
+	height: 97%;
+	width: 99%;
+}
+
+/* Partes do layout da página */
+
+.topo{
+	border-style: solid;
+	height: 25%;
+	width: 100%;
+	font-size: 80%;
+}
+
+.centro{
+	border-style: solid;
+	height: 50%;
+	width: 100%;
+}
+
+.rodape{
+	border-style: solid;
+	height: 25%;
+	width: 100%;
+}
+
+/* Layout do conteudo do centro */
+.barra-lateral-esquerda{
+	border-style: solid;
+	float: left;
+	height: 100%;
+	width: 23.8%;
+}
+
+.conteudo-centro{
+	border-style: solid;
+	float: left;
+	height: 100%;
+	width: 50%;
+}
+
+.barra-lateral-direita{
+	border-style: solid;
+	float: left;
+	height: 100%;
+	width: 23.9%;
+}
+
+.esquerda-titulo{
+	font-size: 100%;
+}
+
+/* Comportamento da listagem de mensagem */ 
+.conteudo-centro-titulo{
+	border-style: solid;
+	height: 10%;
+	width: 100%;
+	font-size: 100%;
+}
+
+/* Comportamento da listagem de mensagem */ 
+.conteudo-centro-mensagens{
+	border-style: solid;
+	height: 50%;
+	width: 100%;
+}
+
+.conteudo-centro-escreve{
+	border-style: solid;
+	height: 34%;
+	width: 100%;
+}
+
+/* Comportamento da listagem de usuarios */
+.lista-usuarios{
+	border-style: solid;
+	height: 90%;
+	width: 100%;
+	
+}

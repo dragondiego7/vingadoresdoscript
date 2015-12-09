@@ -1,0 +1,58 @@
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Vingadores do Websocket</title>
+		
+		<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+		
+		<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="node_modules/socket.io-client/socket.io.js"></script>
+		<script type="text/javascript">
+			var usuario = {
+					id: 1,
+					login: 'Diego'
+			};
+		</script>
+	
+		<link type="text/css" rel="stylesheet" href="assets/css/index.css" />
+	</head>
+	<body class="corpo">
+		<div class="estrutura">
+			<div class="topo">
+				TOPO
+			</div>
+			<div class="centro">
+				<div class="barra-lateral-esquerda">
+					<div class="esquerda-titulo">LE- Lista Usuários</div>
+					<div class="lista-usuarios"></div>
+				</div>
+				<div class="conteudo-centro">
+					<div class="conteudo-centro-titulo">
+						Lista  Mensagens
+					</div>
+					<div class="conteudo-centro-mensagens">
+						<div class="lista-mensagem">
+						</div>
+					</div>
+					<div class="conteudo-centro-escreve">
+						<form action="">
+							Escreva sua mensagem aqui
+							<br />
+							<textarea class="mensagem" id="mensagem" rows="3" cols="40"></textarea>
+							<br />
+							<button name="enviar" id="enviar" type="button">Enviar</button>
+						</form>
+					</div>
+				</div>
+				<div class="barra-lateral-direita">
+					LD
+				</div>
+			</div>
+			<div class="rodape">
+				RODAPE
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="assets/js/index.js"></script>
+</html>
