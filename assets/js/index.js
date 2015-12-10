@@ -1,3 +1,11 @@
+function selecionaUsuario(idEnvia){
+	$("#idEnvio").val(idEnvia);
+};
+
+function removeUsuarioLista(id){
+	$("[element-id = '" + id + "']").remove();
+}
+
 $(document).ready(function(){
 	var mensagem = "";
 	
@@ -9,45 +17,41 @@ $(document).ready(function(){
 		conn.emit('presence', usuario);
 		
 		conn.on('presence', function(usuario){
-			$(".lista-usuarios").append("<div id='conversa' element-id='" + usuario.id + "'>" + usuario.login + "</div><br />");
+			$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + usuario.id + ")'>" + usuario.login + "</div><br />");
 		});
 		
 		conn.on('recebeLista', function(usuarios){
 			$.each(usuarios, function(id, login){
-				$(".lista-usuarios").append("<div id='conversa' element-id='" + id + "'>" + login + "</div><br />");
+				if(usuario.id != id){
+					$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + id + ")'>" + login + "</div><br />");
+				}
 			})
 		});
 		
-		conn.on('removeLista', function(usuario){
-			removeUsuarioLista(usuario.id);
+		conn.on('removeLista', function(idUsuario){
+			removeUsuarioLista(idUsuario);
 		});
 		
 		conn.on('mensagem', function(mensagem){
-			$(".lista-mensagem").append(mensagem.login + ": " + mensagem.mensagem + "<br /><br />");
+			$(".lista-mensagem").append(mensagem.de + ": " + mensagem.mensagem + "<br /><br />");
 		});
 	});
 	
     $("#enviar").click(function(){
-    	mensagem = $("#mensagem").val();
-    	$(".lista-mensagem").append("Eu: " + mensagem + "<br /><br />");
+    	var idEnvio = $("#idEnvio").val();
     	
-    	var pacote = {
-				id: 3,
+    	if(idEnvio != ""){
+	    	mensagem = $("#mensagem").val();
+	    	$(".lista-mensagem").append("Eu: " + mensagem + "<br /><br />");
+	    	
+	    	var pacote = {
+				id: idEnvio,
 				mensagem: mensagem
-		};
-		
-    	conn.emit('mensagem', mensagem);
+			};
+			
+	    	conn.emit('mensagem', pacote);
+    	} else {
+    		alert("Selecione para quem vai mandar essa mensagem!");
+    	}
     });
-    
-    $("#conversa").click(function(){
-    	var idEnvia = this.attr("element-id");
-    	
-    	console.log(idEnvia + " teste");
-    	
-    });
-    
-    function removeUsuarioLista(id){
-    	console.log("ID " + id);
-    	$("[element-id = '" + id + "']").remove();
-    }
 });
