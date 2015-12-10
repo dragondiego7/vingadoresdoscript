@@ -17,13 +17,13 @@ $(document).ready(function(){
 		conn.emit('presence', usuario);
 		
 		conn.on('presence', function(usuario){
-			$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + usuario.id + ")'>" + usuario.login + "</div><br />");
+			$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + usuario.id + ")' element-id = " + usuario.id + ">" + usuario.login + "</div><br />");
 		});
 		
 		conn.on('recebeLista', function(usuarios){
 			$.each(usuarios, function(id, login){
 				if(usuario.id != id){
-					$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + id + ")'>" + login + "</div><br />");
+					$(".lista-usuarios").append("<div onclick='selecionaUsuario(" + id + ")' element-id = " + id + ">" + login + "</div><br />");
 				}
 			})
 		});
@@ -32,12 +32,13 @@ $(document).ready(function(){
 			removeUsuarioLista(idUsuario);
 		});
 		
-		conn.on('mensagem', function(mensagem){
-			$(".lista-mensagem").append(mensagem.de + ": " + mensagem.mensagem + "<br /><br />");
+		conn.on('recebeMensagem', function(pacote){
+			$(".lista-mensagem").append(pacote.de + ": " + pacote.mensagem + "<br /><br />");
 		});
 	});
 	
     $("#enviar").click(function(){
+    	var idUsuario = $("#idUsuario").val();
     	var idEnvio = $("#idEnvio").val();
     	
     	if(idEnvio != ""){
@@ -45,7 +46,8 @@ $(document).ready(function(){
 	    	$(".lista-mensagem").append("Eu: " + mensagem + "<br /><br />");
 	    	
 	    	var pacote = {
-				id: idEnvio,
+	    		idUsuario: idUsuario,
+				idEnvio: idEnvio,
 				mensagem: mensagem
 			};
 			

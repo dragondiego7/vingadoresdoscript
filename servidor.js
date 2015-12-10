@@ -40,14 +40,17 @@ io.on('connection', function(socket) {
 	});
 	
 	// Função de envio de mensagem
-	socket.on('mensagem', function(mensagem){
-		var para = usuariosOnlineCompleto[mensagem.id].para;
-		para.emit('mensagem', { de: "outro", mensagem: mensagem.mensagem });
+	socket.on('mensagem', function(pacote){
+		var de = usuariosOnlineCompleto[pacote.idUsuario].login;
+		var para = usuariosOnlineCompleto[pacote.idEnvio].para;
+		var mensagem = pacote.mensagem;
+		para.emit('recebeMensagem', { de: de, mensagem: mensagem });
 	});
 	
 	// Função para quando um cliente perde a conexão removelo da listagem de usuários online e informar os outros clientes
 	socket.on('disconnect', function(){
 		delete usuariosOnline[socket.usuario.id];
+		delete usuariosOnlineCompleto[socket.usuario.id];
 		socket.broadcast.emit('removeLista', socket.usuario.id);
 	});
 });
